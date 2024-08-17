@@ -49,16 +49,23 @@ async def on_message(message):
 				add = int(info[1:])
 			if re.match("d[1-9]+", info):
 				difficulty = int(info[1:])
+			if re.match("p[1-9]+", info):
+				pool_bonus = int(info[1:])
 			if "sp" == info:
 				add += 1
 				pool_bonus += 1
 		if message.content[2] == "c":
 			character = character_dict[content[1]]
-			if character["attributes"][content[2]] <= 6:
-				n_dice = character["attributes"][content[2]] + character["creed"]
+			if "+" in content[2]:
+				base_attribute, attribute_bonus = content[2].split("+")
+				attribute = character["attributes"][base_attribute] + int(attribute_bonus)
+			else:
+				attribute = character["attributes"][content[2]]
+			if attribute <= 6:
+				n_dice = attribute + character["creed"]
 			else:
 				n_dice = 6 + character["creed"]
-				add += character["attributes"][content[2]] - 6
+				add += attribute - 6
 			skill = character["skills"][content[3]]
 		else:
 			n_dice = int(content[1])
