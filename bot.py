@@ -4,11 +4,15 @@ import re
 from matplotlib import pyplot as plt
 import os
 from dotenv import load_dotenv
+import characters
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client(intents=discord.Intents.all())
+
+
+character_dict = characters.load_all_characters()
 
 def format_diceroll(results, target):
 	dice_string = ""
@@ -28,6 +32,7 @@ def format_diceroll(results, target):
 				dice_string += f"{die}, "
 	return(dice_string[:-2])
 
+
 @client.event
 async def on_message(message):
 	if message.author == client.user:
@@ -38,13 +43,26 @@ async def on_message(message):
 		content = message.content.split()
 		add = 0
 		difficulty = 0
-		target = 7 - int(content[2])
+		pool_bonus = 0
 		for info in content:
 			if re.match("s[1-9]+", info):
 				add = int(info[1:])
 			if re.match("d[1-9]+", info):
 				difficulty = int(info[1:])
-		result = sins_functions.roll(int(content[1]), int(content[2]), add=add, difficulty=difficulty)
+			if "sp" == info:
+				add += 1
+				pool_bonus += 1
+		if message.content[2] == "c":
+			character = character_dict[content[1]]
+			n_dice = character["attributes"][content[2]] + character["creed"]
+			skill = character["skills"][content[3]]
+		else:
+			n_dice = int(content[1])
+			skill = int(content[2])
+
+		n_dice += pool_bonus
+		target = 7 - int(skill)
+		result = sins_functions.roll(int(n_dice), int(skill), add=add, difficulty=difficulty)
 		dice_string = format_diceroll(result[2], target)
 		success_string = f"Rolled **{result[0]}** successes"
 		if add:
