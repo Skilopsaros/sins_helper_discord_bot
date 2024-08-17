@@ -44,6 +44,7 @@ async def on_message(message):
 		add = 0
 		difficulty = 0
 		pool_bonus = 0
+		destroyer = False
 		for info in content:
 			if re.match("s[1-9]+", info):
 				add = int(info[1:])
@@ -51,16 +52,25 @@ async def on_message(message):
 				difficulty = int(info[1:])
 			if re.match("p[1-9]+", info):
 				pool_bonus = int(info[1:])
-			if "sp" == info:
+			if "-sp" == info:
 				add += 1
 				pool_bonus += 1
+			if "-dst" == info:
+				destroyer = True
 		if message.content[2] == "c":
 			character = character_dict[content[1]]
 			if "+" in content[2]:
 				base_attribute, attribute_bonus = content[2].split("+")
 				attribute = character["attributes"][base_attribute] + int(attribute_bonus)
+				atr_name = base_attribute
 			else:
+				atr_name = content[2]
 				attribute = character["attributes"][content[2]]
+			if destroyer:
+				if atr_name == "body":
+					attribute += 3
+				elif atr_name == "prowess":
+					attribute += 2
 			if attribute <= 6:
 				n_dice = attribute + character["creed"]
 			else:
