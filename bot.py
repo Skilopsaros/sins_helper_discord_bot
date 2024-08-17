@@ -54,7 +54,11 @@ async def on_message(message):
 				pool_bonus += 1
 		if message.content[2] == "c":
 			character = character_dict[content[1]]
-			n_dice = character["attributes"][content[2]] + character["creed"]
+			if character["attributes"][content[2]] <= 6:
+				n_dice = character["attributes"][content[2]] + character["creed"]
+			else:
+				n_dice = 6 + character["creed"]
+				add += character["attributes"][content[2]] - 6
 			skill = character["skills"][content[3]]
 		else:
 			n_dice = int(content[1])
