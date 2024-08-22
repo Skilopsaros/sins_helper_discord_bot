@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 import characters
 import copy
+import json
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -14,6 +15,8 @@ client = discord.Client(intents=discord.Intents.all())
 
 
 character_dict = characters.load_all_characters()
+with open("arieta/arieta_lookup.json", "r") as f:
+	arieta_dict = json.load(f)
 
 def format_diceroll(results, target):
 	dice_string = ""
@@ -157,14 +160,23 @@ async def on_message(message):
 				set_to = int(content[4])
 				character_dict[character].change_atr(content[3], set_to)
 				new_value = character_dict[character]['attributes'][content[3]]
-				await message.channel.send(f"{character} attribute {content[3]} raised from {prev_value} to {new_value}")
+				await message.channel.send(f"{character} attribute {content[3]} changed from {prev_value} to {new_value}")
 			elif content[3] == "creed":
 				prev_value = copy.deepcopy(character_dict[character]['creed'])
 				kind = content[4]
 				set_to = int(content[5])
 				character_dict[character].set_creed(kind, set_to)
 				new_value = character_dict[character]['creed']
-				await message.channel.send(f"{character} creed raised from {prev_value} to {new_value}")
+				await message.channel.send(f"{character} creed changed from {prev_value} to {new_value}")
+			
+	elif message.content[0:2] == "$a":
+		content = message.content.split()
+		arieta_id = content[1]
+		arieta_name = arieta_id.replace("_", " ")
+		await message.channel.send(f"Arieta {arieta_name}, {arieta_dict[arieta_id]['song']} rank {arieta_dict[arieta_id]['rank']}")
+		await message.channel.send(file=discord.File(f"arieta/{arieta_dict[arieta_id]['song']}/{arieta_dict[arieta_id]['filename']}"))
+
+
 
 
 

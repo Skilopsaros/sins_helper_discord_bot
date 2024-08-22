@@ -1,30 +1,33 @@
 {
-	"name" : "vanja",
-	"attributes":{
-		"body":3,
-		"conviction":5,
-		"cunning":6,
-		"passion":3,
-		"reason":4,
-		"prowess":5
-	},
-	"skills":{
-		"athletics":2,
-		"authority":1,
-		"logic":2,
-		"panache":1,
-		"perception":4,
-		"resolve":2,
-		"crafts":3,
-		"keening":2,
-		"knowledge":1,
-		"medicine":0,
-		"stealth":3,
-		"survival":1,
-		"archery":0,
-		"fight":3,
-		"marksmanship":4,
-		"melee":0
-	},
-	"creed":{"temporary":2, "permanent":2}
+ "name": "vanja",
+ "attributes": {
+  "body": 3,
+  "conviction": 5,
+  "cunning": 6,
+  "passion": 3,
+  "reason": 4,
+  "prowess": 5
+ },
+ "skills": {
+  "athletics": 2,
+  "authority": 1,
+  "logic": 2,
+  "panache": 1,
+  "perception": 4,
+  "resolve": 2,
+  "crafts": 3,
+  "keening": 2,
+  "knowledge": 1,
+  "medicine": 0,
+  "stealth": 3,
+  "survival": 1,
+  "archery": 0,
+  "fight": 3,
+  "marksmanship": 4,
+  "melee": 0
+ },
+ "creed": {
+  "temporary": 0,
+  "permanent": 2
+ }
 }
