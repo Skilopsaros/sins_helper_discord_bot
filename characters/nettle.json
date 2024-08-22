@@ -1,29 +1,33 @@
 {
-	"attributes":{
-		"body":5,
-		"conviction":5,
-		"cunning":2,
-		"passion":3,
-		"reason":5,
-		"prowess":6
-	},
-	"skills":{
-		"athletics":3,
-		"authority":1,
-		"logic":2,
-		"panache":1,
-		"perception":3,
-		"resolve":2,
-		"crafts":4,
-		"keening":3,
-		"knowledge":1,
-		"medicine":1,
-		"stealth":1,
-		"survival":0,
-		"archery":0,
-		"fight":0,
-		"marksmanship":2,
-		"melee":4
-	},
-	"creed":2
+ "name": "nettle",
+ "attributes": {
+  "body": 5,
+  "conviction": 5,
+  "cunning": 2,
+  "passion": 3,
+  "reason": 5,
+  "prowess": 7
+ },
+ "skills": {
+  "athletics": 3,
+  "authority": 1,
+  "logic": 2,
+  "panache": 1,
+  "perception": 3,
+  "resolve": 3,
+  "crafts": 4,
+  "keening": 4,
+  "knowledge": 1,
+  "medicine": 1,
+  "stealth": 1,
+  "survival": 0,
+  "archery": 0,
+  "fight": 0,
+  "marksmanship": 2,
+  "melee": 4
+ },
+ "creed": {
+  "temporary": "2",
+  "permanent": 2
+ }
 }

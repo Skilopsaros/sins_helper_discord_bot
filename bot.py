@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 import os
 from dotenv import load_dotenv
 import characters
+import copy
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -52,10 +53,10 @@ async def on_message(message):
 				difficulty = int(info[1:])
 			if re.match("p[1-9]+", info):
 				pool_bonus = int(info[1:])
-			if "-sp" == info:
+			if "sp" == info:
 				add += 1
 				pool_bonus += 1
-			if "-dst" == info:
+			if "dst" == info:
 				destroyer = True
 		if message.content[2] == "c":
 			character = character_dict[content[1]]
@@ -100,6 +101,71 @@ async def on_message(message):
 		fig.savefig("temp.png")
 		await message.channel.send(file=discord.File('temp.png'))
 		os.remove("temp.png")
+
+	elif message.content[0:2] == "$c":
+		characteristics = ["skills", "attributes", "creed"]
+		skills = ["athletics","authority","logic","panache","perception","resolve","crafts","keening","knowledge","medicine","stealth","survival","archery","fight","marksmanship","melee"]
+		attributes = ["body","conviction","cunning","passion","reason","prowess"]
+
+		content = message.content.split()
+		character = content[1]
+		action = content[2]
+		if action == "print":
+			if len(content) == 3:
+				await message.channel.send(character_dict[character])
+			elif len(content) == 4:
+				if content[3] in characteristics:
+					await message.channel.send(f"{character} {content[3]}: {character_dict[character][content[3]]}")
+				elif content[3] in skills:
+					await message.channel.send(f"{character} {content[3]}: {character_dict[character]['skills'][content[3]]}")
+				elif content[3] in attributes:
+					await message.channel.send(f"{character} {content[3]}: {character_dict[character]['attributes'][content[3]]}")
+		elif action == "raise":
+			if content[3] in skills:
+				prev_value = prev_value = copy.deepcopy(character_dict[character]['skills'][content[3]])
+				raise_by = 1
+				if len(content) == 5:
+					raise_by = int(content[4])
+				character_dict[character].raise_skill(content[3], raise_by)
+				new_value = character_dict[character]['skills'][content[3]]
+				await message.channel.send(f"{character} skill {content[3]} raised from {prev_value} to {new_value}")
+			elif content[3] in attributes:
+				prev_value = prev_value = copy.deepcopy(character_dict[character]['attributes'][content[3]])
+				raise_by = 1
+				if len(content) == 5:
+					raise_by = int(content[4])
+				character_dict[character].raise_atr(content[3], raise_by)
+				new_value = character_dict[character]['attributes'][content[3]]
+				await message.channel.send(f"{character} attribute {content[3]} raised from {prev_value} to {new_value}")
+			elif content[3] == "creed":
+				prev_value = copy.deepcopy(character_dict[character]['creed'])
+				raise_by = 1
+				if len(content) == 5:
+					raise_by = int(content[4])
+				character_dict[character].raise_creed(raise_by)
+				new_value = character_dict[character]['creed']
+				await message.channel.send(f"{character} creed raised from {prev_value} to {new_value}")
+		elif action == "set":
+			if content[3] in skills:
+				prev_value = prev_value = copy.deepcopy(character_dict[character]['skills'][content[3]])
+				set_to = int(content[4])
+				character_dict[character].set_skill(content[3], set_to)
+				new_value = character_dict[character]['skills'][content[3]]
+				await message.channel.send(f"{character} skill {content[3]} changed from {prev_value} to {new_value}")
+			elif content[3] in attributes:
+				prev_value = prev_value = copy.deepcopy(character_dict[character]['attributes'][content[3]])
+				set_to = int(content[4])
+				character_dict[character].change_atr(content[3], set_to)
+				new_value = character_dict[character]['attributes'][content[3]]
+				await message.channel.send(f"{character} attribute {content[3]} raised from {prev_value} to {new_value}")
+			elif content[3] == "creed":
+				prev_value = copy.deepcopy(character_dict[character]['creed'])
+				kind = content[4]
+				set_to = content[5]
+				character_dict[character].set_creed(kind, set_to)
+				new_value = character_dict[character]['creed']
+				await message.channel.send(f"{character} creed raised from {prev_value} to {new_value}")
+
 
 
 client.run(TOKEN)
