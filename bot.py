@@ -161,7 +161,7 @@ async def on_message(message):
 			elif content[3] == "creed":
 				prev_value = copy.deepcopy(character_dict[character]['creed'])
 				kind = content[4]
-				set_to = content[5]
+				set_to = int(content[5])
 				character_dict[character].set_creed(kind, set_to)
 				new_value = character_dict[character]['creed']
 				await message.channel.send(f"{character} creed raised from {prev_value} to {new_value}")

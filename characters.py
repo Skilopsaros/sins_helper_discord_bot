@@ -38,17 +38,18 @@ class Character(UserDict):
 		self.save_character()
 	
 	def set_creed(self, kind, new_val):
-		self.data["creed"][kind] = new_val
+		self.data["creed"][kind] = int(new_val)
 		self.save_character()
 		
-	def raise_creed(self, raise_by=1):
+	def raise_creed(self, raise_by=1):=
 		self.set_creed("temporary", self.data["creed"]["temporary"]+raise_by)
-		if self.data["creed"]["temporary"] > 6:
+		if self.data["creed"]["temporary"] > 6:=
 			self.raise_creed(raise_by=-7)
-			self.set_creed("permanent", self.data["creed"]["temporary"]+1)
+			self.set_creed("permanent", self.data["creed"]["permanent"]+1)
 		if self.data["creed"]["temporary"] < 0:
 			self.raise_creed(raise_by=7)
-			self.set_creed("permanent", self.data["creed"]["temporary"]-1)
+			self.set_creed("permanent", self.data["creed"]["permanent"]-1)
+
 		self.save_character()
 
 	def __str__(self):

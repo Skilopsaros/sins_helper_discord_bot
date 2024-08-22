@@ -27,7 +27,7 @@
   "melee": 4
  },
  "creed": {
-  "temporary": "2",
+  "temporary": 2,
   "permanent": 2
  }
 }
