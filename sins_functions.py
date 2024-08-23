@@ -72,5 +72,5 @@ def roll_distribution(n_dice, skill_level, n_rolls=10000, add=0, plot=True, diff
 
 
 if __name__ == "__main__":
-	roll_distribution(3, 3, show=True, difficulty=2)
+	roll_until(3, 3, show=True, difficulty=2)
 	pass
