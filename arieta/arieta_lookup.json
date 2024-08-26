@@ -93,16 +93,16 @@
 	"whisper_of_virtue": {"song":"Song of Will", "rank":2, "filename": "2_whisper_of_virtue.png"},
 	"blissful_slumber": {"song":"Song of Will", "rank":3, "filename": "3_blissful_slumber.png"},
 	"defy_the_eye_of_night": {"song":"Song of Will", "rank":3, "filename": "3_defy_the_eye_of_night.png"},
-	"": {"song":"Song of Will", "rank":1, "filename": "3_black_hunger_awoken.png"},
-	"": {"song":"Song of Will", "rank":1, "filename": "3_command_the_heart.png"},
-	"": {"song":"Song of Will", "rank":1, "filename": "4_call_forth_the_hollow.png"},
-	"": {"song":"Song of Will", "rank":1, "filename": "4_channel_anima.png"},
-	"": {"song":"Song of Will", "rank":2, "filename": "4_pandemonium.png"},
-	"": {"song":"Song of Will", "rank":2, "filename": "5_gift_of_chronos.png"},
-	"": {"song":"Song of Will", "rank":2, "filename": "5_the_black_hunger_manifest.png"},
-	"": {"song":"Song of Will", "rank":2, "filename": "5_twin_minds.png"},
-	"": {"song":"Song of Will", "rank":3, "filename": "6_i_defy.png"},
-	"": {"song":"Song of Will", "rank":3, "filename": "6_wisdom_of_the_ages.png"}
+	"black_hunger_awoken": {"song":"Song of Will", "rank":3, "filename": "3_black_hunger_awoken.png"},
+	"command_the_heart": {"song":"Song of Will", "rank":3, "filename": "3_command_the_heart.png"},
+	"call_forth_the_hollow": {"song":"Song of Will", "rank":4, "filename": "4_call_forth_the_hollow.png"},
+	"Channel_anima": {"song":"Song of Will", "rank":4, "filename": "4_channel_anima.png"},
+	"pandemonium": {"song":"Song of Will", "rank":4, "filename": "4_pandemonium.png"},
+	"gift_of_chronos": {"song":"Song of Will", "rank":5, "filename": "5_gift_of_chronos.png"},
+	"the_black_hunger_manifest": {"song":"Song of Will", "rank":5, "filename": "5_the_black_hunger_manifest.png"},
+	"twin_minds": {"song":"Song of Will", "rank":5, "filename": "5_twin_minds.png"},
+	"i_defy": {"song":"Song of Will", "rank":6, "filename": "6_i_defy.png"},
+	"wisdom_of_the_ages": {"song":"Song of Will", "rank":6, "filename": "6_wisdom_of_the_ages.png"}
 
 
 	}
