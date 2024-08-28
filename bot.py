@@ -76,7 +76,7 @@ async def on_message(message):
 				elif atr_name == "prowess":
 					attribute += 2
 			if attribute <= 6:
-				n_dice = attribute + character["creed"]
+				n_dice = attribute + character["creed"]["temporary"]
 			else:
 				n_dice = 6 + character["creed"]
 				add += attribute - 6
