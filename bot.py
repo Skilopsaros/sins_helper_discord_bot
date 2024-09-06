@@ -13,27 +13,27 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client(intents=discord.Intents.all())
 
-
 character_dict = characters.load_all_characters()
 with open("arieta/arieta_lookup.json", "r") as f:
 	arieta_dict = json.load(f)
 
 def format_diceroll(results, target):
+	dice_symbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
 	dice_string = ""
 	for die in results:
 		if isinstance(die, list):
 			dice_string += "("
 			for d in die:
 				if d >= target:
-					dice_string += f"**{d}**, "
+					dice_string += f"__{dice_symbols[d-1]}__, "
 				else:
-					dice_string += f"{d}, "
+					dice_string += f"{dice_symbols[d-1]}, "
 			dice_string = dice_string[:-2] + "), "
 		else:
 			if die >= target:
-				dice_string += f"**{die}**, "
+				dice_string += f"__{dice_symbols[die-1]}__, "
 			else:
-				dice_string += f"{die}, "
+				dice_string += f"{dice_symbols[die-1]}, "
 	return(dice_string[:-2])
 
 
@@ -43,8 +43,8 @@ async def on_message(message):
 		return
 	
 	if message.content[0:2] == "$r":
-		print("rolling dice")
 		content = message.content.split()
+		extra_text = ""
 		add = 0
 		difficulty = 0
 		pool_bonus = 0
@@ -62,25 +62,34 @@ async def on_message(message):
 			if "dst" == info:
 				destroyer = True
 		if message.content[2] == "c":
-			character = character_dict[content[1]]
-			if "+" in content[2]:
-				base_attribute, attribute_bonus = content[2].split("+")
+			if content[1] in character_dict:
+				character_name = content[1]
+				attribute_name = content[2]
+				skill_name     = content[3]
+			else:
+				character_name = message.author.display_name.lower()
+				attribute_name = content[1]
+				skill_name     = content[2]
+			extra_text = f"{character_name.capitalize()}: "
+			character = character_dict[character_name]
+			if "+" in attribute_name:
+				base_attribute, attribute_bonus = attribute_name.split("+")
 				attribute = character["attributes"][base_attribute] + int(attribute_bonus)
 				atr_name = base_attribute
 			else:
-				atr_name = content[2]
-				attribute = character["attributes"][content[2]]
+				atr_name = attribute_name
+				attribute = character["attributes"][attribute_name]
 			if destroyer:
 				if atr_name == "body":
 					attribute += 3
 				elif atr_name == "prowess":
 					attribute += 2
 			if attribute <= 6:
-				n_dice = attribute + character["creed"]["temporary"]
+				n_dice = attribute + character["creed"]["permanent"]
 			else:
-				n_dice = 6 + character["creed"]["temporary"]
+				n_dice = 6 + character["creed"]["permanent"]
 				add += attribute - 6
-			skill = character["skills"][content[3]]
+			skill = character["skills"][skill_name]
 		else:
 			n_dice = int(content[1])
 			skill = int(content[2])
@@ -89,9 +98,12 @@ async def on_message(message):
 		target = 7 - int(skill)
 		result = sins_functions.roll(int(n_dice), int(skill), add=add, difficulty=difficulty)
 		dice_string = format_diceroll(result[2], target)
-		success_string = f"Rolled **{result[0]}** successes"
+		difficulty_text = ""
+		if difficulty:
+			difficulty_text = f", **{result[0]}** successes after difficulty"
+		success_string = f"{extra_text}Rolled **{result[0]+difficulty}** successes{difficulty_text}"
 		if add:
-			success_string = f"Rolled {result[0]-add} + {add} = **{result[0]}** successes"
+			success_string = f"{extra_text}Rolled {result[0]-add+difficulty} + {add} = **{result[0]+difficulty}** successes{difficulty_text}"
 		await message.channel.send(f"{success_string} \n {dice_string}")
 
 	elif message.content[0:2] == "$p":
@@ -111,6 +123,8 @@ async def on_message(message):
 		attributes = ["body","conviction","cunning","passion","reason","prowess"]
 
 		content = message.content.split()
+		if content[1] not in character_dict:
+			content.insert(1, message.author.display_name.lower())
 		character = content[1]
 		action = content[2]
 		if action == "print":

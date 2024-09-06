@@ -1,0 +1,33 @@
+{
+ "name": "beata",
+ "attributes": {
+  "body": 2,
+  "conviction": 6,
+  "cunning": 4,
+  "passion": 5,
+  "reason": 3,
+  "prowess": 5
+ },
+ "skills": {
+  "athletics": 3,
+  "authority": 1,
+  "logic": 1,
+  "panache": 2,
+  "perception": 2,
+  "resolve": 3,
+  "crafts": 1,
+  "keening": 4,
+  "knowledge": 1,
+  "medicine": 3,
+  "stealth": 3,
+  "survival": 1,
+  "archery": 0,
+  "fight": 0,
+  "marksmanship": 4,
+  "melee": 4
+ },
+ "creed": {
+  "temporary": 1,
+  "permanent": 2
+ }
+}

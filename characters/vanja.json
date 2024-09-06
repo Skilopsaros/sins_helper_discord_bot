@@ -1,10 +1,10 @@
 {
  "name": "vanja",
  "attributes": {
-  "body": 3,
+  "body": 4,
   "conviction": 5,
   "cunning": 6,
-  "passion": 3,
+  "passion": 4,
   "reason": 4,
   "prowess": 5
  },
@@ -14,11 +14,11 @@
   "logic": 2,
   "panache": 1,
   "perception": 4,
-  "resolve": 2,
+  "resolve": 3,
   "crafts": 3,
   "keening": 2,
   "knowledge": 1,
-  "medicine": 0,
+  "medicine": 1,
   "stealth": 3,
   "survival": 1,
   "archery": 0,

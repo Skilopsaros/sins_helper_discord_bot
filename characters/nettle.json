@@ -2,7 +2,7 @@
  "name": "nettle",
  "attributes": {
   "body": 6,
-  "conviction": 5,
+  "conviction": 6,
   "cunning": 2,
   "passion": 3,
   "reason": 5,
@@ -17,13 +17,13 @@
   "resolve": 4,
   "crafts": 4,
   "keening": 4,
-  "knowledge": 1,
+  "knowledge": 2,
   "medicine": 1,
   "stealth": 1,
   "survival": 0,
   "archery": 0,
   "fight": 0,
-  "marksmanship": 2,
+  "marksmanship": 3,
   "melee": 4
  },
  "creed": {
