@@ -7,28 +7,29 @@ from dotenv import load_dotenv
 import characters
 import copy
 import json
+import random as rng
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client(intents=discord.Intents.all())
 
+dice_symbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
 character_dict = characters.load_all_characters()
 with open("arieta/arieta_lookup.json", "r") as f:
 	arieta_dict = json.load(f)
 
 def format_diceroll(results, target):
-	dice_symbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
 	dice_string = ""
 	for die in results:
 		if isinstance(die, list):
-			dice_string += "("
+			dice_string += "⟬"
 			for d in die:
 				if d >= target:
 					dice_string += f"__{dice_symbols[d-1]}__, "
 				else:
 					dice_string += f"{dice_symbols[d-1]}, "
-			dice_string = dice_string[:-2] + "), "
+			dice_string = dice_string[:-2] + "⟭, "
 		else:
 			if die >= target:
 				dice_string += f"__{dice_symbols[die-1]}__, "
@@ -43,6 +44,10 @@ async def on_message(message):
 		return
 	
 	if message.content[0:2] == "$r":
+		if message.content[2:4] == "d6":
+			result = rng.choice(range(1,7))
+			await message.channel.send(f"Rolled: {dice_symbols[result-1]} ({result})")
+			return()
 		content = message.content.split()
 		extra_text = ""
 		add = 0
