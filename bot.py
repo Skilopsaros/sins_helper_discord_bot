@@ -15,26 +15,28 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 client = discord.Client(intents=discord.Intents.all())
 
 dice_symbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+dice_emotes_success = ["⚀", "⚁", "<:die_3_s:1284929770358046832>", "<:die_4_s:1284929776108310579>", "<:die_5_s:1284929774673723594>", "<:die_6:1284929772522045521>"]
+dice_emotes_fail    = ["<:die_1_f:1284929761251954729>", "<:die_2_f:1284929762732806144>", "<:die_3_f:1284929765223956492>", "<:die_4_f:1284929766809669722>", "<:die_5_f:1284929768856485940>", "⚅"]
 character_dict = characters.load_all_characters()
 with open("arieta/arieta_lookup.json", "r") as f:
 	arieta_dict = json.load(f)
 
 def format_diceroll(results, target):
-	dice_string = ""
+	dice_string = "# "
 	for die in results:
 		if isinstance(die, list):
 			dice_string += "⟬"
 			for d in die:
 				if d >= target:
-					dice_string += f"__{dice_symbols[d-1]}__, "
+					dice_string += f"{dice_emotes_success[d-1]}, "
 				else:
-					dice_string += f"{dice_symbols[d-1]}, "
+					dice_string += f"{dice_emotes_fail[d-1]}, "
 			dice_string = dice_string[:-2] + "⟭, "
 		else:
 			if die >= target:
-				dice_string += f"__{dice_symbols[die-1]}__, "
+				dice_string += f"{dice_emotes_success[die-1]}, "
 			else:
-				dice_string += f"{dice_symbols[die-1]}, "
+				dice_string += f"{dice_emotes_fail[die-1]}, "
 	return(dice_string[:-2])
 
 
@@ -109,7 +111,7 @@ async def on_message(message):
 		success_string = f"{extra_text}Rolled **{result[0]+difficulty}** successes{difficulty_text}"
 		if add:
 			success_string = f"{extra_text}Rolled {result[0]-add+difficulty} + {add} = **{result[0]+difficulty}** successes{difficulty_text}"
-		await message.channel.send(f"{success_string} \n {dice_string}")
+		await message.channel.send(f"{success_string} \n{dice_string}")
 
 	elif message.content[0:2] == "$p":
 		content = message.content.split()

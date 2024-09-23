@@ -1,7 +1,7 @@
 {
  "name": "beata",
  "attributes": {
-  "body": 2,
+  "body": 3,
   "conviction": 6,
   "cunning": 4,
   "passion": 5,
@@ -18,8 +18,8 @@
   "crafts": 1,
   "keening": 4,
   "knowledge": 1,
-  "medicine": 3,
-  "stealth": 3,
+  "medicine": 4,
+  "stealth": 4,
   "survival": 1,
   "archery": 0,
   "fight": 0,
@@ -27,7 +27,7 @@
   "melee": 4
  },
  "creed": {
-  "temporary": 1,
+  "temporary": 2,
   "permanent": 2
  }
 }
