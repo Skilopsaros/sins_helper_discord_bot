@@ -4,30 +4,30 @@
   "body": 4,
   "conviction": 5,
   "cunning": 6,
-  "passion": 4,
+  "passion": 5,
   "reason": 4,
   "prowess": 5
  },
  "skills": {
-  "athletics": 2,
-  "authority": 1,
+  "athletics": 3,
+  "authority": 2,
   "logic": 2,
-  "panache": 1,
+  "panache": 4,
   "perception": 4,
-  "resolve": 3,
+  "resolve": 4,
   "crafts": 3,
-  "keening": 2,
-  "knowledge": 1,
+  "keening": 4,
+  "knowledge": 2,
   "medicine": 1,
   "stealth": 3,
   "survival": 1,
   "archery": 0,
-  "fight": 3,
+  "fight": 4,
   "marksmanship": 4,
   "melee": 0
  },
  "creed": {
-  "temporary": 2,
-  "permanent": 2
+  "temporary": 3,
+  "permanent": 3
  }
 }

@@ -1,5 +1,6 @@
 import discord
 import sins_functions
+import date_tracker
 import re
 from matplotlib import pyplot as plt
 import os
@@ -196,6 +197,33 @@ async def on_message(message):
 		arieta_name = arieta_id.replace("_", " ")
 		await message.channel.send(f"Arieta {arieta_name}, {arieta_dict[arieta_id]['song']} rank {arieta_dict[arieta_id]['rank']}")
 		await message.channel.send(file=discord.File(f"arieta/{arieta_dict[arieta_id]['song']}/{arieta_dict[arieta_id]['filename']}"))
+
+	elif message.content[0:2] == "$d":
+		content = message.content.split()
+		current_date = date_tracker.load_date()
+
+		if len(content) > 1:
+			if content[1] == "set":
+				date_tracker.set_date(*content[2:5])
+				
+			elif content[1] == "add" or content[1] == "advance" or content[1] == "adv":
+				if len(content) == 2:
+					date_tracker.add_time(current_date, n_days=1)
+				else:
+					for arg in content[2:]:
+						if arg[-1] in "0123456789":
+							date_tracker.add_time(current_date, n_days=int(arg))
+						if arg[-1] == "d":
+							date_tracker.add_time(current_date, n_days=int(arg[:-1]))
+						if arg[-1] == "w":
+							date_tracker.add_time(current_date, n_weeks=int(arg[:-1]))
+						if arg[-1] == "m":
+							date_tracker.add_time(current_date, n_months=int(arg[:-1]))
+			
+
+		current_date = date_tracker.load_date()
+		await message.channel.send(f"Date: {current_date.strftime('%A %d %b %YAF')}")
+
 
 
 

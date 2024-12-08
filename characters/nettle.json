@@ -2,7 +2,7 @@
  "name": "nettle",
  "attributes": {
   "body": 6,
-  "conviction": 6,
+  "conviction": 7,
   "cunning": 2,
   "passion": 3,
   "reason": 5,
@@ -10,16 +10,16 @@
  },
  "skills": {
   "athletics": 4,
-  "authority": 1,
-  "logic": 2,
+  "authority": 4,
+  "logic": 4,
   "panache": 1,
   "perception": 3,
   "resolve": 4,
   "crafts": 4,
   "keening": 4,
-  "knowledge": 2,
+  "knowledge": 3,
   "medicine": 1,
-  "stealth": 1,
+  "stealth": 3,
   "survival": 0,
   "archery": 0,
   "fight": 0,
@@ -28,6 +28,6 @@
  },
  "creed": {
   "temporary": 4,
-  "permanent": 2
+  "permanent": 3
  }
 }

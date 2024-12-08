@@ -70,7 +70,24 @@ def roll_distribution(n_dice, skill_level, n_rolls=10000, add=0, plot=True, diff
 			plt.show()
 	return(results, fig)
 
+def roll_until_distribution(target, n_dice, skill_level, add=0, difficulty=0, n_rolls=10000, plot=True, show=False):
+	tries = []
+	for i in range(n_rolls):
+		tries.append(roll_until(target, n_dice, skill_level, add, difficulty))
+	if plot:
+		mode = stats.mode(tries, keepdims=False)
+		modal_bin = [mode[0]-0.5,mode[0]+0.5]
+		bins = np.arange(-0.5, max(tries)+1.5, 1)
+		fig = plt.figure()
+		ax = fig.add_subplot(111)
+		ax.title.set_text(f"Roll {n_dice} dice with skill {skill_level}")
+		ax.hist(tries, bins, weights=np.ones(len(tries)) / len(tries))
+		ax.hist([mode[0] for x in range(mode[1])], modal_bin, weights=np.ones(mode[1]) / len(tries))
+		ax.yaxis.set_major_formatter(ticker.PercentFormatter(1))
+		ax.set_xticks(range(max(tries)+1))
+		if show:
+			plt.show()
 
 if __name__ == "__main__":
-	roll_until(3, 3, show=True, difficulty=2)
+	roll_until_distribution(15, 8, 4, show=True, difficulty=1)
 	pass
