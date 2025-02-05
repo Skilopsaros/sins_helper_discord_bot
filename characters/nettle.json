@@ -1,7 +1,7 @@
 {
  "name": "nettle",
  "attributes": {
-  "body": 6,
+  "body": 7,
   "conviction": 7,
   "cunning": 2,
   "passion": 3,
@@ -22,12 +22,12 @@
   "stealth": 3,
   "survival": 0,
   "archery": 0,
-  "fight": 0,
+  "fight": 2,
   "marksmanship": 3,
   "melee": 4
  },
  "creed": {
-  "temporary": 4,
+  "temporary": 6,
   "permanent": 3
  }
 }
