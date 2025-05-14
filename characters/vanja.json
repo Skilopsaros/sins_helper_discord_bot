@@ -6,7 +6,7 @@
   "cunning": 7,
   "passion": 5,
   "reason": 4,
-  "prowess": 6
+  "prowess": 7
  },
  "skills": {
   "athletics": 4,
@@ -18,16 +18,16 @@
   "crafts": 3,
   "keening": 4,
   "knowledge": 3,
-  "medicine": 1,
-  "stealth": 3,
+  "medicine": 2,
+  "stealth": 4,
   "survival": 1,
   "archery": 0,
   "fight": 4,
   "marksmanship": 4,
-  "melee": 0
+  "melee": 4
  },
  "creed": {
-  "temporary": 6,
-  "permanent": 3
+  "temporary": 1,
+  "permanent": 4
  }
 }

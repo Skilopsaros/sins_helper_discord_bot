@@ -19,15 +19,15 @@
   "keening": 4,
   "knowledge": 3,
   "medicine": 1,
-  "stealth": 3,
+  "stealth": 4,
   "survival": 0,
   "archery": 0,
-  "fight": 2,
-  "marksmanship": 3,
+  "fight": 4,
+  "marksmanship": 4,
   "melee": 4
  },
  "creed": {
-  "temporary": 6,
-  "permanent": 3
+  "temporary": 1,
+  "permanent": 4
  }
 }
