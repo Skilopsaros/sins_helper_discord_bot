@@ -110,7 +110,8 @@ async def on_message(message):
 		difficulty_text = f", **{n_success}** successes after difficulty" if difficulty else ""
 		success_string = f"{extra_text}Rolled **{n_success+difficulty}** successes{difficulty_text}"
 		if add:
-			success_string = f"{extra_text}Rolled {n_success-add+difficulty} + {add} = **{n_success+difficulty}** successes{difficulty_text}"
+			add_sign = "-" if add < 0 else "+"
+			success_string = f"{extra_text}Rolled {n_success-add+difficulty} {add_sign} {abs(add)} = **{n_success+difficulty}** successes{difficulty_text}"
 		await message.channel.send(f"{success_string} \n{dice_string}")
 
 	elif message.content[0:2] == "$p":
