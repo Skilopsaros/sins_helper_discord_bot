@@ -58,11 +58,11 @@ async def on_message(message):
 		pool_bonus = 0
 		destroyer = False
 		for info in content:
-			if re.match("s[1-9]+", info):
+			if re.match("s-?[1-9]+", info):
 				add = int(info[1:])
-			if re.match("d[1-9]+", info):
+			if re.match("d-?[1-9]+", info):
 				difficulty = int(info[1:])
-			if re.match("p[1-9]+", info):
+			if re.match("p-?[1-9]+", info):
 				pool_bonus = int(info[1:])
 			if "sp" == info:
 				add += 1
@@ -104,14 +104,13 @@ async def on_message(message):
 
 		n_dice += pool_bonus
 		target = 7 - int(skill)
-		result = sins_functions.roll(int(n_dice), int(skill), add=add, difficulty=difficulty)
-		dice_string = format_diceroll(result[2], target)
-		difficulty_text = ""
-		if difficulty:
-			difficulty_text = f", **{result[0]}** successes after difficulty"
-		success_string = f"{extra_text}Rolled **{result[0]+difficulty}** successes{difficulty_text}"
+		n_success, dice_results, results_per_die = sins_functions.roll(int(n_dice), int(skill), add=add, difficulty=difficulty)
+
+		dice_string = format_diceroll(results_per_die, target)
+		difficulty_text = f", **{n_success}** successes after difficulty" if difficulty else ""
+		success_string = f"{extra_text}Rolled **{n_success+difficulty}** successes{difficulty_text}"
 		if add:
-			success_string = f"{extra_text}Rolled {result[0]-add+difficulty} + {add} = **{result[0]+difficulty}** successes{difficulty_text}"
+			success_string = f"{extra_text}Rolled {n_success-add+difficulty} + {add} = **{n_success+difficulty}** successes{difficulty_text}"
 		await message.channel.send(f"{success_string} \n{dice_string}")
 
 	elif message.content[0:2] == "$p":
