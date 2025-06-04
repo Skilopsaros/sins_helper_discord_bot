@@ -103,9 +103,10 @@ async def on_message(message):
 			skill = int(content[2])
 
 		n_dice += pool_bonus
-		target = 7 - int(skill)
+		target = 6 if int(skill) == 0 else 7 - int(skill) 
+		print(target)
 		n_success, dice_results, results_per_die = sins_functions.roll(int(n_dice), int(skill), add=add, difficulty=difficulty)
-
+		print(results_per_die)
 		dice_string = format_diceroll(results_per_die, target)
 		difficulty_text = f", **{n_success}** successes after difficulty" if difficulty else ""
 		success_string = f"{extra_text}Rolled **{n_success+difficulty}** successes{difficulty_text}"

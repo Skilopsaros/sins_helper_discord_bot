@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 from matplotlib import ticker
 import numpy as np
 from scipy import stats
+import copy
 
 def roll(n_dice, skill_level, explode=None, add=0, difficulty=0):
 	if explode is None:
@@ -11,18 +12,17 @@ def roll(n_dice, skill_level, explode=None, add=0, difficulty=0):
 	dice_results = [rng.choice(range(1,7)) for _ in range(n_dice)]
 	results_per_die = []
 	non_6_results = []
-	if explode:
-		explosion_results = []
-		for die in dice_results:
-			if die == 6:
-				new_result = roll(1, skill_level, explode)[1]
-				explosion_results.extend(new_result)
-				explosion_and_results = [6]
-				explosion_and_results.extend(new_result)
-				results_per_die.append(explosion_and_results)
-			else:
-				non_6_results.append(die)
-		dice_results.extend(explosion_results)
+	explosion_results = []
+	for die in dice_results:
+		if die == 6 and explode:
+			new_result = roll(1, skill_level, explode)[1]
+			explosion_results.extend(new_result)
+			explosion_and_results = [6]
+			explosion_and_results.extend(new_result)
+			results_per_die.append(explosion_and_results)
+		else:
+			non_6_results.append(die)
+	dice_results.extend(explosion_results)
 	dice_results.sort(reverse=True)
 	results_per_die.sort(key=lambda x: len(x), reverse=True)
 	non_6_results.sort(reverse=True)
