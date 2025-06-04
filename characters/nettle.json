@@ -1,12 +1,12 @@
 {
  "name": "nettle",
  "attributes": {
-  "body": 7,
+  "body": 8,
   "conviction": 7,
   "cunning": 2,
   "passion": 3,
   "reason": 5,
-  "prowess": 7
+  "prowess": 8
  },
  "skills": {
   "athletics": 4,
@@ -21,13 +21,13 @@
   "medicine": 1,
   "stealth": 4,
   "survival": 0,
-  "archery": 0,
+  "archery": 4,
   "fight": 4,
   "marksmanship": 4,
   "melee": 4
  },
  "creed": {
-  "temporary": 1,
+  "temporary": 3,
   "permanent": 4
  }
 }

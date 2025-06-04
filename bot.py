@@ -120,7 +120,7 @@ async def on_message(message):
 		for info in content:
 			if re.match("d[1-9]+", info):
 				difficulty = int(info[1:])
-		results, fig = sins_functions.roll_distribution(int(content[1]), int(content[2]), difficulty=difficulty)
+		results, fig = sins_functions.roll_distribution(int(content[1]), int(content[2]), difficulty=difficulty, n_rolls=40000)
 		fig.savefig("temp.png")
 		await message.channel.send(file=discord.File('temp.png'))
 		os.remove("temp.png")

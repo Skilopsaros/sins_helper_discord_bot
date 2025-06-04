@@ -1,7 +1,7 @@
 {
  "name": "beata",
  "attributes": {
-  "body": 4,
+  "body": 5,
   "conviction": 7,
   "cunning": 4,
   "passion": 6,
@@ -27,7 +27,7 @@
   "melee": 4
  },
  "creed": {
-  "temporary": 4,
-  "permanent": 4
+  "temporary": 0,
+  "permanent": 5
  }
 }

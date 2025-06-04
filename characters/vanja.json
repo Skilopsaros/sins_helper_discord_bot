@@ -1,7 +1,7 @@
 {
  "name": "vanja",
  "attributes": {
-  "body": 4,
+  "body": 5,
   "conviction": 5,
   "cunning": 7,
   "passion": 5,
@@ -17,17 +17,17 @@
   "resolve": 4,
   "crafts": 3,
   "keening": 4,
-  "knowledge": 3,
+  "knowledge": 4,
   "medicine": 2,
   "stealth": 4,
-  "survival": 1,
+  "survival": 4,
   "archery": 0,
   "fight": 4,
   "marksmanship": 4,
   "melee": 4
  },
  "creed": {
-  "temporary": 1,
+  "temporary": 4,
   "permanent": 4
  }
 }
